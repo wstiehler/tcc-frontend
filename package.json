@@ -1,0 +1,36 @@
+{
+  "name": "ngps-portal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^5.1.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "next": "^12.1.6",
+    "next-auth": "^4.18.7",
+    "query": "github:tanstack/react-query",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-query": "^3.39.2",
+    "react-router-dom": "^6.3.0",
+    "swr": "^1.3.0",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6"
+  },
+  "browser": {
+    "fs": false
+  }
+}

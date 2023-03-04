@@ -1,0 +1,1 @@
+Mudar o ip para o localhost nas requisições
