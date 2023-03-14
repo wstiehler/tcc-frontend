@@ -66,6 +66,7 @@ body {
   width: 50%;
 }
 
+
 .class-modal .error-template {
   padding: 35vh 15px 15px 15px;
   text-align: center;
@@ -131,3 +132,4 @@ body {
   }
 }
 /* End Access Denied */
+

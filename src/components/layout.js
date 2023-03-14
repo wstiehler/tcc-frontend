@@ -1,4 +1,4 @@
-import { LogoutOutlined, LoginOutlined, InfoCircleOutlined, DownOutlined, HomeOutlined } from '@ant-design/icons';
+import { LogoutOutlined, LoginOutlined, InfoCircleOutlined, DownOutlined, HomeOutlined, GlobalOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button } from 'antd';
 import React, { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
@@ -6,22 +6,12 @@ import { useRouter } from 'next/router'
 
 import Link from 'next/link'
 
-import AccessDenied from "../components/access-denied"
-
 const CustomLayout = ({ children }) => {
     const { data: session } = useSession();
 
     const { Header, Content, Footer, Sider } = Layout;
 
     const router = useRouter();
-
-    // if (!session) {
-    //     return (
-    //         <Layout>
-    //             <AccessDenied />
-    //         </Layout>
-    //     )
-    // }
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -40,15 +30,12 @@ const CustomLayout = ({ children }) => {
                         <h1 className='logo'>Open Vagas</h1>
 
                         <Menu.Item key="sub1">
-                            <Link href="/"><a><HomeOutlined /><span>Home</span></a></Link>
+                            <Link href="/"><a><HomeOutlined /><span>Início</span></a></Link>
                         </Menu.Item>
 
                         <Menu.SubMenu key="sub2" icon={<DownOutlined />} title="Vagas">
                             <Menu.Item key="1">
                                 <Link href="/vagas/cadastrar"><a><span>Cadastrar</span></a></Link>
-                            </Menu.Item>
-                            <Menu.Item key="2">
-                                <Link href="/vagas/dashboard"><a><span>Dashboard</span></a></Link>
                             </Menu.Item>
                             <Menu.Item key="3">
                                 <Link href="/vagas"><a><span>Em aberto</span></a></Link>
@@ -58,15 +45,19 @@ const CustomLayout = ({ children }) => {
                             </Menu.Item>
                         </Menu.SubMenu>
 
-
                         <Menu.Item key="sub3">
+                            <Link href="/vagas/dashboard"><a><GlobalOutlined /><span>Dashboard</span></a></Link>
+                        </Menu.Item>
+
+
+                        <Menu.Item key="sub4">
                             <Link href="/sobre"><a><InfoCircleOutlined /><span>Sobre o projeto</span></a></Link>
                         </Menu.Item>
                     </Menu>
 
                 </Header>
 
-                <Content style={{marginLeft: '90px', marginRight: '90px' }}>
+                <Content>
                     {children}
                 </Content>
 

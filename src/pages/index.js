@@ -1,4 +1,4 @@
-import { FieldTimeOutlined, DollarOutlined, HomeOutlined } from '@ant-design/icons';
+import { FieldTimeOutlined, DollarOutlined, HomeOutlined, HeartOutlined, FullscreenOutlined } from '@ant-design/icons';
 
 import Message from '../components/message';
 import DetailJob from '../components/jobs/details-job';
@@ -63,10 +63,6 @@ const Index = () => {
         ) : null
     );
 
-    const xpto = () => {
-        alert('xpto');
-    }
-
     const IconText = ({ icon, text }) => (
         <Space>
             {React.createElement(icon, { style: { marginRight: 8 } })}
@@ -76,7 +72,7 @@ const Index = () => {
 
 
     return (
-        <div>
+        <div style={{marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>
                     <HomeOutlined />
@@ -95,8 +91,9 @@ const Index = () => {
                                 <List.Item
                                     actions={
                                         [
-                                            <a key="list-loadmore-edit" onClick={DetailJob}>Detalhes</a>,
-                                            <a key="list-loadmore-more" onClick={Message} > Candidatar-se</a>
+                                            <a key="list-loadmore-more" onClick={Message}>Candidatar-se</a>,
+                                            <a key="list-loadmore-edit" onClick={DetailJob}><FullscreenOutlined /></a>,
+                                            <a key="list-loadmore-more" onClick={Message}><HeartOutlined /></a>
                                         ]
                                     }
                                 >

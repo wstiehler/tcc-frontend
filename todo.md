@@ -1,0 +1,1 @@
+* Import de imagens atraves do NextJs

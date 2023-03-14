@@ -5,7 +5,6 @@ import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link'
 
 import CreateJob from '../../components/jobs/create-job';
-import Xpto from '../../components/xpto'; 
 import AccessDenied from "../../components/access-denied"
 
 
@@ -22,7 +21,7 @@ const Cadastrar = () => {
     }
 
     return (
-        <div>
+        <div style={{marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>
                     <Link href="/"><a><HomeOutlined /></a></Link>
@@ -32,9 +31,7 @@ const Cadastrar = () => {
 
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
-                {/* <CreateJob /> */}
-                <Xpto />
-
+                <CreateJob />
             </div>
         </div>
     );
