@@ -3,6 +3,7 @@ import { Layout, Menu, Button } from 'antd';
 import React, { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router'
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 import Link from 'next/link'
 

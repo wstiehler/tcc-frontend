@@ -70,7 +70,7 @@ const Sobre = () => {
                         color: '#415A80',
                         fontSize: '14px',
                         textAlign: 'center',
-                        opacity: '0.7',
+                        opacity: '0.8',
 
                         //Deixar o texto no centro
                         display: 'flex',
@@ -83,7 +83,7 @@ const Sobre = () => {
                                 color: '#415A80',
                                 fontSize: '18px',
                                 fontWeight: 'bold',
-                                opacity: '1',
+                                opacity: '0.9',
                             }}>Encontre o ajuste certo</span>
                             <br /><br />
                             Entendemos que encontrar o emprego certo é mais do que apenas olhar para uma lista de vagas disponíveis. É por isso que fornecemos perfis detalhados de cada empregador para que você possa se certificar de que o trabalho é adequado para você antes de se candidatar.
@@ -98,7 +98,7 @@ const Sobre = () => {
                             <br /><br />
 
                             Nossa plataforma foi projetada para ser simples e fácil de usar. Com nossas ferramentas de pesquisa intuitivas, você pode restringir rapidamente suas opções e encontrar o emprego perfeito para suas habilidades e preferências.
-                            <br /><br />
+                            <br/><br />
 
                             <span style={{
                                 color: '#415A80',
@@ -106,7 +106,7 @@ const Sobre = () => {
                                 fontWeight: 'bold',
                                 opacity: '1',
                             }}> Seguro e confidencial </span>
-                            <br />
+                            <br/><br />
 
                             Sua segurança é nossa principal prioridade. É por isso que toda a comunicação entre empregadores e candidatos ocorre em nossa plataforma segura, garantindo que todas as informações sejam mantidas em sigilo e protegidas de olhares indiscretos.
                         </h1>

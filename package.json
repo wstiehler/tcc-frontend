@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@auth0/nextjs-auth0": "^2.2.3",
     "antd": "^5.1.1",
     "axios": "^0.27.2",
     "dotenv": "^16.0.3",

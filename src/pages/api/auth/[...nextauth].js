@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import Auth0Provider from "next-auth/providers/auth0"
+
 
 export const authOptions = {
   providers: [
@@ -34,6 +36,12 @@ export const authOptions = {
         return null;
       }
     }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      issuer: process.env.AUTH0_ISSUER_BASE_URL,
+    })
+      
   ],
   callbacks: {
     async jwt ({ token, user }) {
