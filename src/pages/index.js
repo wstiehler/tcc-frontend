@@ -3,6 +3,8 @@ import { FieldTimeOutlined, DollarOutlined, HomeOutlined, HeartOutlined, Fullscr
 import Message from '../components/message';
 import DetailJob from '../components/jobs/details-job';
 
+import fetchVacaniesList from '../hooks/fetchVacaniesList';
+
 
 import React, { useEffect, useState } from 'react';
 import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card } from 'antd';
@@ -16,6 +18,10 @@ const Index = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
+
+    const xpto = fetchVacaniesList();
+
+    console.log(xpto)
 
     useEffect(() => {
         getData((res) => {
@@ -84,9 +90,9 @@ const Index = () => {
                     itemLayout="horizontal"
                     loading={initLoading}
                     loadMore={loadMore}
-                    dataSource={list}
+                    dataSource={xpto.vacancies}
                     renderItem={(item) => (
-                        <Badge.Ribbon text="Sênior" color="green">
+                        <Badge.Ribbon text={item.level_experience} color="green">
                             <Card size="small">
                                 <List.Item
                                     actions={
@@ -99,15 +105,16 @@ const Index = () => {
                                 >
                                     <Skeleton avatar title={false} loading={item.loading} active>
                                         <List.Item.Meta
-                                            avatar={<Avatar src={item.picture.large} />}
-                                            title={<a href="https://ant.design">{item.name?.last}</a>}
-                                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                            avatar={<Avatar src={""} />}
+                                            title={<a href="https://ant.design">{item.vacancy_name}</a>}
+                                            description={item.description}
                                             style={{ display: 'flex' }}
-                                        />
+                                            />
+                                            <h5>Teste</h5>
                                         <List.Item
                                             actions={[
-                                                <IconText icon={DollarOutlined} text="1200" key="list-vertical-star-o" />,
-                                                <IconText icon={FieldTimeOutlined} text="2" key="list-vertical-like-o" />,
+                                                <IconText icon={DollarOutlined} text={item.salary} key="list-vertical-star-o" />,
+                                                <IconText icon={FieldTimeOutlined} text={item.responsible.company_name} key="list-vertical-like-o" />,
                                             ]}
                                         />
                                     </Skeleton>

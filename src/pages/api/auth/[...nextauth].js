@@ -48,6 +48,7 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.sessionId = user.sessionId;
+        token.image = user.image;
       }
       return token;
     },
@@ -55,6 +56,7 @@ export const authOptions = {
       // Send properties to the client, like an access_token and user id from a provider.
       session.accessToken = token.accessToken
       session.user.id = token.id
+      session.user.image = token.image
       
       return session
     }

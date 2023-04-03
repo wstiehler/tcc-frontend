@@ -3,14 +3,13 @@ import { Layout, Menu, Button } from 'antd';
 import React, { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router'
-import { useUser } from '@auth0/nextjs-auth0/client';
 
 import Link from 'next/link'
 
 const CustomLayout = ({ children }) => {
     const { data: session } = useSession();
 
-    const { Header, Content, Footer, Sider } = Layout;
+    const { Header, Content, Footer } = Layout;
 
     const router = useRouter();
 

@@ -84,7 +84,7 @@ const Sobre = () => {
                                 fontSize: '18px',
                                 fontWeight: 'bold',
                                 opacity: '0.9',
-                            }}>Encontre o ajuste certo</span>
+                            }}>Encontre o emprego certo</span>
                             <br /><br />
                             Entendemos que encontrar o emprego certo é mais do que apenas olhar para uma lista de vagas disponíveis. É por isso que fornecemos perfis detalhados de cada empregador para que você possa se certificar de que o trabalho é adequado para você antes de se candidatar.
                             <br /><br />

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Avatar, Col, Divider, Drawer, List, Row } from 'antd';
 import DescriptionItem from '../description-item'
 
-const DetailJob = () => {
+import {useState} from 'react'
+
+export default function DetailJob () {
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -104,5 +106,3 @@ const DetailJob = () => {
     </>
   );
 };
-
-export default DetailJob;
