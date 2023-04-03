@@ -29,7 +29,7 @@ const CustomLayout = ({ children }) => {
                     <Menu  mode="horizontal"  style={{background: '#415A80', color: '#fff'}}>
                         <h1 className='logo'>Open Vagas</h1>
 
-                        <Menu.Item key="sub1">
+                        <Menu.Item key="sub1" style={{color: router.pathname === '/' ? 'black' : '#fff'}}>
                             <Link href="/"><a><HomeOutlined /><span>Início</span></a></Link>
                         </Menu.Item>
 
@@ -45,12 +45,12 @@ const CustomLayout = ({ children }) => {
                             </Menu.Item>
                         </Menu.SubMenu>
 
-                        <Menu.Item key="sub3">
+                        <Menu.Item key="sub3" style={{color: router.pathname === '/vagas/dashboard' ? 'black' : '#fff'}} >
                             <Link href="/vagas/dashboard"><a><GlobalOutlined /><span>Dashboard</span></a></Link>
                         </Menu.Item>
 
 
-                        <Menu.Item key="sub4">
+                        <Menu.Item key="sub4" style={{color: router.pathname === '/sobre' ? 'black' : '#fff'}}>
                             <Link href="/sobre"><a><InfoCircleOutlined /><span>Sobre o projeto</span></a></Link>
                         </Menu.Item>
                     </Menu>

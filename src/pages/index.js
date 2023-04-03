@@ -1,4 +1,4 @@
-import { FieldTimeOutlined, DollarOutlined, HomeOutlined, HeartOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined, HeartOutlined, FullscreenOutlined } from '@ant-design/icons';
 
 import Message from '../components/message';
 import DetailJob from '../components/jobs/details-job';
@@ -11,63 +11,40 @@ import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card } from '
 
 const Index = () => {
 
-    const count = 3;
-    const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
+    // const count = 3;
+    // const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
 
-    const [initLoading, setInitLoading] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
-    const [list, setList] = useState([]);
+    // const [initLoading, setInitLoading] = useState(true);
+    // const [loading, setLoading] = useState(false);
 
-    const xpto = fetchVacaniesList();
+    // const isLoading = fetchVacaniesList();
+    const data = fetchVacaniesList();
 
-    console.log(xpto)
+    // console.log(isLoading)
 
-    useEffect(() => {
-        getData((res) => {
-            setData(res.results);
-            setList(res.results);
-            setInitLoading(false);
-        });
-    }, []);
+    // const onLoadMore = () => {
+    //     setLoading(true);
+    //     if (xpto.length > 14) {
+    //         message.warning('Infinite List loaded all');
+    //         setLoading(false);
+    //         return;
+    //     }
+    // };
 
-    const getData = (callback) => {
-        fetch(fakeDataUrl)
-            .then((response) => response.json())
-            .then((res) => callback(res))
-            .catch((e) => {
-                console.log(e);
-            });
-    };
-
-    const onLoadMore = () => {
-        setLoading(true);
-        if (data.length > 14) {
-            message.warning('Infinite List loaded all');
-            setLoading(false);
-            return;
-        }
-        getData((res) => {
-            setData(data.concat(res.results));
-            setList(data.concat(res.results));
-            setLoading(false);
-        });
-    };
-
-    const loadMore = (
-        !initLoading && !loading ? (
-            <div
-                style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
-                }}
-            >
-                <Button onClick={onLoadMore}>Carregar mais vagas</Button>
-            </div>
-        ) : null
-    );
+    // const loadMore = (
+    //     !initLoading && !loading ? (
+    //         <div
+    //             style={{
+    //                 textAlign: 'center',
+    //                 marginTop: 12,
+    //                 height: 32,
+    //                 lineHeight: '32px',
+    //             }}
+    //         >
+    //             <Button onClick={onLoadMore}>Carregar mais vagas</Button>
+    //         </div>
+    //     ) : null
+    // );
 
     const IconText = ({ icon, text }) => (
         <Space>
@@ -88,11 +65,13 @@ const Index = () => {
                 <List
                     className="demo-loadmore-list"
                     itemLayout="horizontal"
-                    loading={initLoading}
-                    loadMore={loadMore}
-                    dataSource={xpto.vacancies}
+                    // loading={initLoading}
+                    // loadMore={loadMore}
+                    dataSource={data.vacancies}
                     renderItem={(item) => (
-                        <Badge.Ribbon text={item.level_experience} color="green">
+                        <Badge.Ribbon  text={item.level_experience} 
+                            color={item.level_experience === 'Junior' ? 'green' : item.level_experience === 'Pleno' ? 'blue' : item.level_experience === 'Senior' ? 'gray' : 'black'}
+                        >
                             <Card size="small">
                                 <List.Item
                                     actions={
@@ -105,16 +84,16 @@ const Index = () => {
                                 >
                                     <Skeleton avatar title={false} loading={item.loading} active>
                                         <List.Item.Meta
-                                            avatar={<Avatar src={""} />}
+                                            avatar={<Avatar src={" "} />}
                                             title={<a href="https://ant.design">{item.vacancy_name}</a>}
                                             description={item.description}
-                                            style={{ display: 'flex' }}
+                                            style={{ display: 'flex', justifyContent: 'space-between' }}
                                             />
-                                            <h5>Teste</h5>
                                         <List.Item
                                             actions={[
-                                                <IconText icon={DollarOutlined} text={item.salary} key="list-vertical-star-o" />,
-                                                <IconText icon={FieldTimeOutlined} text={item.responsible.company_name} key="list-vertical-like-o" />,
+                                                <IconText icon={DollarOutlined} text={"R$ "+ item.salary} 
+                                                key="list-vertical-star-o" />,
+                                                <IconText icon={SafetyCertificateOutlined} text={item.company_name} key="list-vertical-like-o" />,
                                             ]}
                                         />
                                     </Skeleton>

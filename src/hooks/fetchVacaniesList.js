@@ -24,17 +24,12 @@ export default function fetchVacaniesList(){
             />
         </Spin>
     )
-    if (isLoading) return (
-        <Spin tip="Loading...">
-            <Alert
-                message="Aguarde!"
-                description="Estamos preparando tudo para você."
-                type="info"
-            />
-        </Spin>
-    )
+
     
-    return data
+    return (
+        data
+    )
+
         
 }
 

@@ -225,7 +225,7 @@ const CreateJob = () => {
 
   const steps = [
     {
-      title: 'Informações Gerais',
+      title: 'Informações da Vaga',
       content: FormStep1(),
     },
     {
@@ -233,7 +233,7 @@ const CreateJob = () => {
       content: FormStep2(),
     },
     {
-      title: 'Informações da Vaga',
+      title: 'Informações Gerais',
       content: FormStep3(),
     },
   ];
