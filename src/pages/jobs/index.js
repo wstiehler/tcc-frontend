@@ -1,18 +1,30 @@
-import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined, HeartOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined } from '@ant-design/icons';
 
-import Message from '../components/message';
-import DetailJob from '../components/jobs/details-job';
+import Message from '../../components/message';
+import { useSession } from 'next-auth/react';
+import AccessDenied from '../../components/access-denied';
 
-import fetchVacaniesList from '../hooks/fetchVacaniesList';
-
-
-import React from 'react';
 import Link from 'next/link';
-import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card } from 'antd';
+
+import fetcherVacanciesByEmail from '../../hooks/fetchVacaniesByEmail';
+
+import React, { useEffect, useState } from 'react';
+import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card, Layout } from 'antd';
 
 const Index = () => {
 
-    const data = fetchVacaniesList();
+    const { data: session } = useSession();
+
+    if (!session) {
+        return (
+            <Layout>
+                <AccessDenied />
+            </Layout>
+        )
+    }
+
+    const data = fetcherVacanciesByEmail();
+
 
     const IconText = ({ icon, text }) => (
         <Space>
@@ -25,16 +37,13 @@ const Index = () => {
     return (
         <div style={{marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>
-                    <HomeOutlined />
-                </Breadcrumb.Item>
+                <Breadcrumb.Item><Link href="/"><a><HomeOutlined /></a></Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link href="/">Vagas</Link></Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
                 <List
                     className="demo-loadmore-list"
                     itemLayout="horizontal"
-                    // loading={initLoading}
-                    // loadMore={loadMore}
                     dataSource={data.vacancies}
                     renderItem={(item) => (
                         <Badge.Ribbon  text={item.level_experience} 
@@ -44,18 +53,17 @@ const Index = () => {
                                 <List.Item
                                     actions={
                                         [
-                                            <a key="list-loadmore-more" onClick={Message}>Candidatar-se</a>,
-                                            <a key="list-loadmore-edit" onClick={DetailJob}><FullscreenOutlined /></a>,
-                                            <a key="list-loadmore-more" onClick={Message}><HeartOutlined /></a>
+                                            <a key="list-loadmore-more" onClick={Message}>Editar</a>,
+                                            <a key="list-loadmore-more" onClick={Message}>Encerrar</a>,
                                         ]
                                     }
                                 >
                                     <Skeleton avatar title={false} loading={item.loading} active>
                                         <List.Item.Meta
-                                            avatar={<Avatar src={""} />}
+                                            avatar={<Avatar src={" "} />}
                                             title={<Link href={`/jobs/${item.id}`}><a>{item.vacancy_name}</a></Link>}
                                             description={item.description}
-                                            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                                            style={{ display: 'flex', justifyContent: 'space-between' }}
                                             />
                                         <List.Item
                                             actions={[

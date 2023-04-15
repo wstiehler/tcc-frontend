@@ -4,113 +4,58 @@ import {
   message,
   Steps,
   theme,
-  Cascader,
-  DatePicker,
   Form,
   Input,
   InputNumber,
   Select,
-  Switch,
-  TreeSelect,
   Col,
   Row,
 } from 'antd';
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
+import saveFormData from '../../hooks/createVacancy';
+import { useQueryClient } from 'react-query';
+import { useSession } from 'next-auth/react';
+
+
 
 const CreateJob = () => {
 
+  const queryClient = useQueryClient();
+
+  const { data: session } = useSession();
+
+  const [formData, setFormData] = useState({
+    level_experience: '',
+    vacancy_name: '',
+    description: '',
+    specification : '',
+    salary: 0,
+    is_home_office: '',
+    cultural_caracteristics: '',
+    has_physical_accessibility: '',
+    has_superior_monitors: '',
+    company_name: '',
+    email: session.user.email,
+
+    responsible : {
+      responsible_name: '',
+      contact: '',
+    }
+  });
+
+  const handleSubmit = async () => {
+    try {
+      await saveFormData(formData);
+      queryClient.invalidateQueries('formdata');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const FormStep1 = () => {
-    return (
-      <Form
-        labelCol={{ span: 12 }}
-        wrapperCol={{ span: 12 }}
-        layout="horizontal"
-        style={{
-          marginTop: 40
-        }}
-      >
-        <Row gutter={12}>
-          <Col span={16}>
-            <Form.Item label="Input">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Select">
-              <Select>
-                <Select.Option value="demo">Demo</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item label="TreeSelect">
-              <TreeSelect
-                treeData={[
-                  { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item label="Cascader">
-              <Cascader
-                options={[
-                  {
-                    value: 'zhejiang',
-                    label: 'Zhejiang',
-                    children: [{ value: 'hangzhou', label: 'Hangzhou' }],
-                  },
-                ]}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
-    );
-  };
-
-  const FormStep2 = () => {
-    return (
-      <Form
-        labelCol={{ span: 12 }}
-        wrapperCol={{ span: 12 }}
-        layout="horizontal"
-        style={{
-          marginTop: 40
-        }}
-      >
-        <Row gutter={12}>
-          <Col span={16}>
-            <Form.Item label="Input">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Select">
-              <Select>
-                <Select.Option value="demo">Demo</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item label="TreeSelect">
-              <TreeSelect
-                treeData={[
-                  { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item label="Cascader">
-              <Cascader
-                options={[
-                  {
-                    value: 'zhejiang',
-                    label: 'Zhejiang',
-                    children: [{ value: 'hangzhou', label: 'Hangzhou' }],
-                  },
-                ]}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
-    );
-  };
-
-  const FormStep3 = () => {
 
     const formItemLayout = {
       labelCol: {
@@ -122,7 +67,7 @@ const CreateJob = () => {
         sm: { span: 12 },
       },
     };
-    
+
     const formItemLayoutWithOutLabel = {
       wrapperCol: {
         xs: { span: 12, offset: 0 },
@@ -141,23 +86,61 @@ const CreateJob = () => {
       >
         <Row gutter={12}>
           <Col span={16}>
-            <Form.Item label="Input">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Select">
-              <Select>
-                <Select.Option value="demo">Demo</Select.Option>
-              </Select>
-            </Form.Item>
-            <Form.Item label="TreeSelect">
-              <TreeSelect
-                treeData={[
-                  { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                ]}
+            <Form.Item label="Título">
+              <Input
+                placeholder="Título da vaga"
+                value={formData.vacancy_name}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    vacancy_name: event.target.value,
+                  }))
+                }
               />
             </Form.Item>
+            <Form.Item label="Senioridade">
+              <Select
+                placeholder="Selecione a senioridade"
+                value={formData.level_experience}
+                onChange={(value) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    level_experience: value,
+                  }))
+                }>
+                <Select.Option value="Junior">Junior</Select.Option>
+                <Select.Option value="Pleno">Pleno</Select.Option>
+                <Select.Option value="Sênior">Sênior</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Faixa Salarial">
+              <InputNumber 
+                placeholder="Faixa salarial"
+                value={formData.salary}
+                onChange={(value) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    salary: value,
+                  }))
+                }
+              />
+            </Form.Item>
+
+            <Form.Item label="Descrição">
+              <Input.TextArea
+                placeholder="Descreva a vaga e o que você espera do candidato"
+                value={formData.description}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    description: event.target.value,
+                  }))
+                }
+              />
+            </Form.Item>
+
             <Form.List
-              name="names"
+              name="Especificações"
               rules={[
                 {
                   validator: async (_, names) => {
@@ -189,7 +172,7 @@ const CreateJob = () => {
                         ]}
                         noStyle
                       >
-                        <Input placeholder="O que você procura no seu candidato?" style={{width:'95%'}} />
+                        <Input placeholder="O que você procura no seu candidato?" style={{ width: '95%' }} />
                       </Form.Item>
                       {fields.length > 1 ? (
                         <MinusCircleOutlined
@@ -199,7 +182,17 @@ const CreateJob = () => {
                       ) : null}
                     </Form.Item>
                   ))}
-                  <Form.Item>
+                  <Form.Item
+                   placeholder="Descreva a vaga e o que você espera do candidato"
+                   value={formData.specification}
+                   onChange={(event) =>
+                     setFormData((prevFormData) => ({
+                       ...prevFormData,
+                       specification: event.target.value,
+                     }))
+                   }
+                  >
+                    
                     <Button
                       type="dashed"
                       onClick={() => add()}
@@ -216,6 +209,150 @@ const CreateJob = () => {
                 </>
               )}
             </Form.List>
+          </Col>
+        </Row>
+      </Form>
+    );
+  };
+
+  const FormStep2 = () => {
+    return (
+      <Form
+        labelCol={{ span: 12 }}
+        wrapperCol={{ span: 12 }}
+        layout="horizontal"
+        style={{
+          marginTop: 40
+        }}
+      >
+        <Row gutter={12}>
+          <Col span={16}>
+            <Form.Item label="Empresa">
+              <Input 
+                placeholder="Nome da empresa"
+                value={formData.company_name}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    company_name: event.target.value ,
+                  }))
+                }
+              />
+            </Form.Item>
+            <Form.Item label="Responsável">
+              <Input 
+                placeholder="Nome da empresa"
+                value={formData.responsible_name}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    responsible_name: event.target.value ,
+                  }))
+                }
+              />
+            </Form.Item>
+            {/* <Form.Item label="E-mail">
+              <Input 
+                placeholder="E-mail da empresa"
+                value={formData.email}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    email: event.target.value,
+                  }))
+                }
+              />
+            </Form.Item> */}
+            <Form.Item label="Telefone">
+              <Input 
+                placeholder="Telefone da empresa"
+                value={formData.contact}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    contact: event.target.value,
+                  }))
+                }
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    );
+  };
+
+  const FormStep3 = () => {
+
+    return (
+      <Form
+        labelCol={{ span: 12 }}
+        wrapperCol={{ span: 12 }}
+        layout="horizontal"
+        style={{
+          marginTop: 40
+        }}
+      >
+        <Row gutter={12}>
+          <Col span={16}>
+            <Form.Item label="O local possui acessibilidade?">
+              <Select
+                placeholder="Selecione uma opção"
+                value={formData.has_physical_accessibility}
+                onChange={(value) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    has_physical_accessibility: value,
+                  }))
+                }
+              >
+                <Select.Option value="Sim">Sim</Select.Option>
+                <Select.Option value="Não">Não</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Profissional p/ Acompanhamento">
+              <Select
+                placeholder="Selecione uma opção"
+                value={formData.has_superior_monitors}
+                onChange={(value) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    has_superior_monitors: value,
+                  }))
+                }
+              >
+                <Select.Option value="Sim">Sim</Select.Option>
+                <Select.Option value="Não">Não</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Home Office">
+              <Select
+                placeholder="Selecione uma opção"
+                value={formData.is_home_office}
+                onChange={(value) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    is_home_office: value,
+                  }))
+                }
+              >
+                <Select.Option value="Sim">Sim</Select.Option>
+                <Select.Option value="Não">Não</Select.Option>
+                <Select.Option value="Parcialmente">Parcialmente</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Cultura">
+              <Input.TextArea 
+                placeholder="Descreva a cultura da empresa"
+                value={formData.cultural_caracteristics}
+                onChange={(event) =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    cultural_caracteristics: event.target.value,
+                  }))
+                }
+              />
+            </Form.Item>
+
           </Col>
         </Row>
       </Form>
@@ -274,7 +411,8 @@ const CreateJob = () => {
           )}
           {current === steps.length - 1 && (
             <Button type="primary" onClick={() =>
-              message.success('Processo finalizado com sucesso!')
+              [message.success('Processo finalizado com sucesso!'),
+              handleSubmit()]
             }>
               Enviar
             </Button>

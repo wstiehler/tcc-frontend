@@ -35,18 +35,18 @@ const CustomLayout = ({ children }) => {
 
                         <Menu.SubMenu key="sub2" icon={<DownOutlined />} title="Vagas">
                             <Menu.Item key="1">
-                                <Link href="/vagas/cadastrar"><a><span>Cadastrar</span></a></Link>
+                                <Link href="/jobs/new"><a><span>Cadastrar</span></a></Link>
                             </Menu.Item>
                             <Menu.Item key="3">
-                                <Link href="/vagas"><a><span>Em aberto</span></a></Link>
+                                <Link href="/jobs"><a><span>Em aberto</span></a></Link>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <Link href="/vagas/encerradas"><a><span>Encerradas</span></a></Link>
+                                <Link href="/jobs/closed"><a><span>Encerradas</span></a></Link>
                             </Menu.Item>
                         </Menu.SubMenu>
 
-                        <Menu.Item key="sub3" style={{color: router.pathname === '/vagas/dashboard' ? 'black' : '#fff'}} >
-                            <Link href="/vagas/dashboard"><a><GlobalOutlined /><span>Dashboard</span></a></Link>
+                        <Menu.Item key="sub3" style={{color: router.pathname === '/jobs/dashboard' ? 'black' : '#fff'}} >
+                            <Link href="/jobs/dashboard"><a><GlobalOutlined /><span>Dashboard</span></a></Link>
                         </Menu.Item>
 
 
