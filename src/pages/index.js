@@ -1,9 +1,8 @@
 import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined, HeartOutlined, FullscreenOutlined } from '@ant-design/icons';
 
-import Message from '../components/message';
-import DetailJob from '../components/jobs/details-job';
+import MessageWaiting from '../components/messages/messageWaiting';
 
-import fetchVacaniesList from '../hooks/fetchVacaniesList';
+import fetchJobsList from '../hooks/fetchJobsList';
 
 
 import React from 'react';
@@ -12,7 +11,7 @@ import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card } from '
 
 const Index = () => {
 
-    const data = fetchVacaniesList();
+    const data = fetchJobsList();
 
     const IconText = ({ icon, text }) => (
         <Space>
@@ -25,28 +24,24 @@ const Index = () => {
     return (
         <div style={{marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>
-                    <HomeOutlined />
-                </Breadcrumb.Item>
+                <Breadcrumb.Item><HomeOutlined/></Breadcrumb.Item>
+                <Breadcrumb.Item>Vagas</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
                 <List
                     className="demo-loadmore-list"
                     itemLayout="horizontal"
-                    // loading={initLoading}
-                    // loadMore={loadMore}
                     dataSource={data.vacancies}
                     renderItem={(item) => (
                         <Badge.Ribbon  text={item.level_experience} 
-                            color={item.level_experience === 'Junior' ? 'green' : item.level_experience === 'Pleno' ? 'blue' : item.level_experience === 'Senior' ? 'gray' : 'black'}
+                            color={item.level_experience === 'Junior' ? 'green' : item.level_experience === 'Pleno' ? 'blue' : item.level_experience === 'Sênior' ? 'black' : 'gray'}
                         >
                             <Card size="small">
                                 <List.Item
                                     actions={
                                         [
-                                            <a key="list-loadmore-more" onClick={Message}>Candidatar-se</a>,
-                                            <a key="list-loadmore-edit" onClick={DetailJob}><FullscreenOutlined /></a>,
-                                            <a key="list-loadmore-more" onClick={Message}><HeartOutlined /></a>
+                                            <a key="list-loadmore-more" onClick={MessageWaiting}>Candidatar-se</a>,
+                                            <a key="list-loadmore-more" onClick={MessageWaiting}><HeartOutlined /></a>
                                         ]
                                     }
                                 >

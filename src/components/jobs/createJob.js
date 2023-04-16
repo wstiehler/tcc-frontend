@@ -14,9 +14,10 @@ import {
 
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-import saveFormData from '../../hooks/createVacancy';
+import createJobData from '../../hooks/createJob';
 import { useQueryClient } from 'react-query';
 import { useSession } from 'next-auth/react';
+import router from 'next/router';
 
 
 
@@ -47,7 +48,8 @@ const CreateJob = () => {
 
   const handleSubmit = async () => {
     try {
-      await saveFormData(formData);
+      await createJobData(formData);
+      router.push('/jobs')
       queryClient.invalidateQueries('formdata');
     } catch (error) {
       console.error(error);
@@ -251,18 +253,6 @@ const CreateJob = () => {
                 }
               />
             </Form.Item>
-            {/* <Form.Item label="E-mail">
-              <Input 
-                placeholder="E-mail da empresa"
-                value={formData.email}
-                onChange={(event) =>
-                  setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    email: event.target.value,
-                  }))
-                }
-              />
-            </Form.Item> */}
             <Form.Item label="Telefone">
               <Input 
                 placeholder="Telefone da empresa"
@@ -412,7 +402,8 @@ const CreateJob = () => {
           {current === steps.length - 1 && (
             <Button type="primary" onClick={() =>
               [message.success('Processo finalizado com sucesso!'),
-              handleSubmit()]
+              handleSubmit()
+            ]
             }>
               Enviar
             </Button>

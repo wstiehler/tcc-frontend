@@ -41,7 +41,7 @@ const CustomLayout = ({ children }) => {
                                 <Link href="/jobs"><a><span>Em aberto</span></a></Link>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <Link href="/jobs/closed"><a><span>Encerradas</span></a></Link>
+                                <Link href="/jobs/inactive"><a><span>Encerradas</span></a></Link>
                             </Menu.Item>
                         </Menu.SubMenu>
 

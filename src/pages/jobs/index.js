@@ -1,15 +1,16 @@
 import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined } from '@ant-design/icons';
 
-import Message from '../../components/message';
+import Message from '../../components/messages/message';
 import { useSession } from 'next-auth/react';
 import AccessDenied from '../../components/access-denied';
 
 import Link from 'next/link';
 
-import fetcherVacanciesByEmail from '../../hooks/fetchVacaniesByEmail';
+import fetcherJobsByEmail from '../../hooks/fetchJobsByEmail';
+import inactiveJob from '../../hooks/inactiveJob';
 
-import React, { useEffect, useState } from 'react';
-import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card, Layout } from 'antd';
+import React from 'react';
+import { Avatar, Breadcrumb, List, Skeleton, Space, Badge, Card, Layout, Modal } from 'antd';
 
 const Index = () => {
 
@@ -23,7 +24,7 @@ const Index = () => {
         )
     }
 
-    const data = fetcherVacanciesByEmail();
+    const data = fetcherJobsByEmail();
 
 
     const IconText = ({ icon, text }) => (
@@ -33,12 +34,26 @@ const Index = () => {
         </Space>
     );
 
+    // const InactiveJob = (id) => {
+    //     // inactiveJob(id);
+    //     Modal.success({
+    //         content: 'Vaga encerrada com sucesso!',
+    //     });
+    // }
+
+    const MessageWaiting = () => {
+        Modal.info({
+            content: 'Aguarde, em breve estará disponível!',
+        });
+    }
+
 
     return (
         <div style={{marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link href="/"><a><HomeOutlined /></a></Link></Breadcrumb.Item>
                 <Breadcrumb.Item><Link href="/">Vagas</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>Minhas Vagas</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
                 <List
@@ -53,8 +68,8 @@ const Index = () => {
                                 <List.Item
                                     actions={
                                         [
-                                            <a key="list-loadmore-more" onClick={Message}>Editar</a>,
-                                            <a key="list-loadmore-more" onClick={Message}>Encerrar</a>,
+                                            <a key="messageEdit" onClick={MessageWaiting}>Editar</a>,
+                                            <a key="messageWaiting" onClick={MessageWaiting}>Inativar</a>,
                                         ]
                                     }
                                 >

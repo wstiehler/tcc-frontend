@@ -1,17 +1,17 @@
-import { unstable_getServerSession } from "next-auth/next"
+import { getServerSession } from "next-auth/next"
 import { authOptions } from "./auth/[...nextauth]"
 
 
 export default async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   if (session) {
     res.send({
       content:
-        "This is protected content. You can access this content because you are signed in.",
+        "Este é o conteúdo protegido. Você só pode vê-lo se estiver logado no site.",
     })
   } else {
     res.send({
-      error: "You must be signed in to view the protected content on this page.",
+      error: "Você não tem permissão para acessar este conteúdo.",
     })
   }
 }

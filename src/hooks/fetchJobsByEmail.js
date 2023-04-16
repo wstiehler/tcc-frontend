@@ -1,12 +1,23 @@
+
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
-import { Spin, Alert} from "antd";
+import { Spin, Alert } from "antd";
+import { useSession } from "next-auth/react";
 
-export default function fetchVacaniesList(){
+export default function fetcherJobsByEmail() {
 
-    const fetcherVacancies = async () => await(await (await fetch(process.env.NEXT_PUBLIC_API_BACKEND+'/v1/vacancies')).json())
+    const { data: session } = useSession();
 
-    const { data, isLoading, isFetching, isError } = useQuery('vacancies', fetcherVacancies);
+
+    const fetcherJobsByEmail = async () => await (await (await fetch(process.env.NEXT_PUBLIC_API_BACKEND + '/v1/vacancies/' + session.user.email, {
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: 'Bearer ' + session.accessToken
+        }
+
+    })).json())
+
+    const { data, isLoading, isFetching, isError } = useQuery('vacancies', fetcherJobsByEmail);
 
     if (isError) return (
         <Alert
@@ -15,6 +26,7 @@ export default function fetchVacaniesList(){
             type="error"
         />
     )
+
     if (isFetching) return (
         <Spin tip="Loading...">
             <Alert
@@ -29,14 +41,12 @@ export default function fetchVacaniesList(){
         data
     )
 
-        
 }
-
 
 export async function getStaticProps() {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery('vacancies', fetchVacaniesList);
+    await queryClient.prefetchQuery('vacancies', fetcherJobsByEmail);
 
     return {
         props: {

@@ -4,7 +4,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link'
 
-import CreateJob from '../../components/jobs/create-job';
+import CreateJob from '../../components/jobs/createJob';
 import AccessDenied from "../../components/access-denied"
 
 
@@ -25,7 +25,7 @@ const New = () => {
             <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item><Link href="/"><a><HomeOutlined /></a></Link></Breadcrumb.Item>
                 <Breadcrumb.Item><Link href="/">Vagas</Link></Breadcrumb.Item>
-                <Breadcrumb.Item><Link href="/jobs/new">Cadastrar</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>Cadastrar</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
                 <CreateJob />

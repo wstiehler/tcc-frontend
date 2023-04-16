@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const saveFormData = async (formData) => {
+const createJobData = async (formData) => {
   try {
     const response = await axios.post(process.env.NEXT_PUBLIC_API_BACKEND+'/v1/vacancy', formData);
     return response.data;
@@ -9,4 +9,4 @@ const saveFormData = async (formData) => {
   }
 };
 
-export default saveFormData;
+export default createJobData;
