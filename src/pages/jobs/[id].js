@@ -8,6 +8,7 @@ import DetailJob from '../../components/jobs/detailsJob';
 
 const ItemDetailPage = ({ itemId }) => {
     const queryClient = useQueryClient();
+
     const { data: item, isLoading, isError, error } = fetcherJobById(itemId);
 
     if (isLoading) {
@@ -38,7 +39,7 @@ const ItemDetailPage = ({ itemId }) => {
         <div style={{ marginLeft: '90px', marginRight: '90px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item><Link href="/"><a><HomeOutlined /></a></Link></Breadcrumb.Item>
-                <Breadcrumb.Item><Link href="/jobs">Minhas Vagas</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link href="/">Vagas</Link></Breadcrumb.Item>         
                 <Breadcrumb.Item>{item.vacancy_name}</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>

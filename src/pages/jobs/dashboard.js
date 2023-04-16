@@ -4,7 +4,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import Link from 'next/link'
 
 import { useSession } from 'next-auth/react';
-import AccessDenied from "../../components/access-denied"
+import AccessDenied from "../../components/accessDenied"
 
 const Dashboard = () => {
 

@@ -7,7 +7,7 @@ import fetchJobsList from '../hooks/fetchJobsList';
 
 import React from 'react';
 import Link from 'next/link';
-import { Avatar, Breadcrumb, List, Skeleton, Button, Space, Badge, Card } from 'antd';
+import { Avatar, Breadcrumb, List, Skeleton, Space, Badge, Card } from 'antd';
 
 const Index = () => {
 

@@ -1,8 +1,9 @@
 import { SafetyCertificateOutlined, DollarOutlined, HomeOutlined } from '@ant-design/icons';
 
 import Message from '../../components/messages/message';
+import MessageWaiting from '../../components/messages/messageWaiting';
 import { useSession } from 'next-auth/react';
-import AccessDenied from '../../components/access-denied';
+import AccessDenied from '../../components/accessDenied';
 
 import Link from 'next/link';
 
@@ -40,13 +41,6 @@ const Index = () => {
     //         content: 'Vaga encerrada com sucesso!',
     //     });
     // }
-
-    const MessageWaiting = () => {
-        Modal.info({
-            content: 'Aguarde, em breve estará disponível!',
-        });
-    }
-
 
     return (
         <div style={{marginLeft: '90px', marginRight: '90px' }}>

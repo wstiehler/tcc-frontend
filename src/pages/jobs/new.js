@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link'
 
 import CreateJob from '../../components/jobs/createJob';
-import AccessDenied from "../../components/access-denied"
+import AccessDenied from "../../components/accessDenied"
 
 
 const New = () => {
