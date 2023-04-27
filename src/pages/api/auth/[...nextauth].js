@@ -14,23 +14,23 @@ export const authOptions = {
       authorize: (credentials) => {
         if (
           credentials.username === "admin" && 
-          credentials.password === "Hwga$DK4mG"
+          credentials.password === "admin"
         ){
           return {
             id: 1,
-            name: "William Villani",
-            email: "william.stiehler@evoluinfo.com.br",
+            name: "User Admin",
+            email: "admin@evoluinfo.com.br",
           };
         } 
 
         else if (
-          credentials.username === "fvillani" && 
-          credentials.password === "ng@2023"
+          credentials.username === "user" && 
+          credentials.password === "user"
         ){
           return {
             id: 2,
-            name: "Fernando Villani",
-            email: "villani@nutrigourmet.net",
+            name: "User",
+            email: "user@evoluinfo.com.br",
           };
         }
         return null;
