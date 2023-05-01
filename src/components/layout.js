@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router'
 
-import GetVersion from '../components/getVersion'
+// import GetVersion from '../components/getVersion'
 
 import Link from 'next/link'
 
@@ -78,7 +78,8 @@ const CustomLayout = ({ children }) => {
                         ©2023 OpenVagas Created By <a href="https://www.linkedin.com/in/wstiehler/" target="_blank">William Villani Stiehler</a>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                        {GetVersion()}
+                        {/* {GetVersion()} */}
+                        Release: v1.0.1
                     </div>
                 </Footer>
             </Layout>
